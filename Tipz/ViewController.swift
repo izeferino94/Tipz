@@ -17,6 +17,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        tipChoice.setTitle("18%", forSegmentAt: 0)
+        tipChoice.setTitle("18%", forSegmentAt: 1)
+        tipChoice.setTitle("18%", forSegmentAt: 2)
+
     }
 
     override func didReceiveMemoryWarning() {

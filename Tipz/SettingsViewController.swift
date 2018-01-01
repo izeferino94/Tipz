@@ -105,6 +105,15 @@ class SettingsViewController: UIViewController {
         defaults.set(false, forKey: "customFirstPercent")
         defaults.set(false, forKey: "customSecondPercent")
         defaults.set(false, forKey: "customThirdPercent")
+        
+        defaults.set(18, forKey: "thirdPercent")
+        defaults.set(20, forKey: "secondPercent")
+        defaults.set(25, forKey: "thirdPercent")
+        defaults.synchronize()
+        
+        firstPercentValue.text = "18%"
+        secondPercentValue.text = "20%"
+        thirdPercentValue.text = "25%"
     }
     
     
