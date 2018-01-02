@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     @IBAction func calculateTip(_ sender: Any) {
         var tipPercentages = [0.18, 0.2, 0.25]
         
+        // Set the value of tipPercentages to calculate tip and total
         if defaults.bool(forKey: "customFirstPercent") == true {
             tipPercentages[0] =  defaults.double(forKey: "firstPercent") / 100
         }
@@ -45,6 +46,7 @@ class ViewController: UIViewController {
             tipPercentages[2] =  defaults.double(forKey: "thirdPercent") / 100
         }
         
+        //Calculate the tip and total and update the labels
         let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipChoice.selectedSegmentIndex]
         let total = bill + tip
@@ -54,28 +56,17 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("view will appear")
-        // This is a good place to retrieve the default tip percentage from UserDefaults
-        // and use it to update the tip amount
+        
+        //When coming back from settings page, we set the segmented controller and update Tip and Total
         loadPercentChoices()
         billField.sendActions(for: UIControlEvents.editingChanged)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("view did appear")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        print("view will disappear")
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("view did disappear")
-    }
-    
+    /*
+     Function that sets the value of the segment controller
+     If the defaults are set, then get values from there.
+     If not, then we set the original values.
+     */
     func loadPercentChoices() {
         if defaults.bool(forKey: "customFirstPercent") == true {
             let firstPercent = defaults.double(forKey: "firstPercent")
