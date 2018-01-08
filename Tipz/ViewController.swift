@@ -54,6 +54,40 @@ class ViewController: UIViewController {
         totalValue.text = String.init(format: "$%.2f", total)
     }
     
+    
+    @IBAction func tipPercentChanged(_ sender: Any) {
+        
+        /*
+        //Reset value of frame
+        self.tipValue.frame.origin.y = 157
+        UIView.animate(withDuration: 1, animations: {
+            self.totalValue.textColor = .green
+        }, completion: nil)
+        
+        UIView.animate(withDuration: 1, animations: {
+            self.tipValue.textColor = .green
+            //self.tipValue.frame.size.width += 10
+            //self.tipValue.frame.size.height += 10
+        }) { _ in
+            UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
+                self.tipValue.frame.origin.y -= 10
+            })
+        }
+        */
+        
+        // Optionally initialize the property to a desired starting value
+        //self.firstView.alpha = 0
+        //self.secondView.alpha = 1
+        UIView.animate(withDuration:1, animations: {
+            // This causes first view to fade in and second view to fade out
+            self.tipValue.alpha = 0
+            self.totalValue.alpha = 0
+            self.tipValue.alpha = 1
+            self.totalValue.alpha = 1
+        }, completion: nil)
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -89,6 +123,7 @@ class ViewController: UIViewController {
             tipChoice.setTitle("25%", forSegmentAt: 2)
         }
     }
+    
     
 }
 

@@ -78,6 +78,7 @@
                                 <connections>
                                     <action selector="calculateTip:" destination="BYZ-38-t0r" eventType="valueChanged" id="Z9l-LZ-aQg"/>
                                     <action selector="percentChoice:" destination="yg6-ia-zsi" eventType="valueChanged" id="kHt-zh-yUK"/>
+                                    <action selector="tipPercentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="axp-6N-dm6"/>
                                 </connections>
                             </segmentedControl>
                         </subviews>
