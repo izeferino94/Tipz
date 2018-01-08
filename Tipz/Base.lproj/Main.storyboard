@@ -191,8 +191,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="UWl-wj-MAc">
-                                <rect key="frame" x="294" y="403" width="46" height="30"/>
+                                <rect key="frame" x="282" y="403" width="58" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Reset"/>
                                 <connections>
                                     <action selector="resetPercent:" destination="VpD-r2-2D8" eventType="touchUpInside" id="4rI-AL-1Xe"/>

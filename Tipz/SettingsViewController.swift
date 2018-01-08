@@ -117,6 +117,16 @@ class SettingsViewController: UIViewController {
         firstPercentValue.text = "18%"
         secondPercentValue.text = "20%"
         thirdPercentValue.text = "25%"
+        
+        // Animation
+        UIView.animate(withDuration:1, animations: {
+            self.firstPercentValue.alpha = 0
+            self.secondPercentValue.alpha = 0
+            self.thirdPercentValue.alpha = 0
+            self.firstPercentValue.alpha = 1
+            self.secondPercentValue.alpha = 1
+            self.thirdPercentValue.alpha = 1
+        }, completion: nil)
     }
     
 }

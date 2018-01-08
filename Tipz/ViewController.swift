@@ -96,6 +96,19 @@ class ViewController: UIViewController {
         billField.sendActions(for: UIControlEvents.editingChanged)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        billField.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     /*
      Function that sets the value of the segment controller
      If the defaults are set, then get values from there.
