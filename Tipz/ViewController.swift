@@ -15,10 +15,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipChoice: UISegmentedControl!
     
     let defaults = UserDefaults.standard
+    let currencyFormatter = NumberFormatter()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         loadPercentChoices()
+        
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.numberStyle = NumberFormatter.Style.currency
+        // localize to your grouping and decimal separator
+        currencyFormatter.locale = NSLocale.current
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +58,8 @@ class ViewController: UIViewController {
         let total = bill + tip
         tipValue.text = String.init(format: "$%.2f", tip)
         totalValue.text = String.init(format: "$%.2f", total)
+        tipValue.text = currencyFormatter.string(from: NSNumber(value: tip))
+        totalValue.text = currencyFormatter.string(from: NSNumber(value: total))
     }
     
     
