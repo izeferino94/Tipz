@@ -4,7 +4,7 @@
 
 Submitted by: Isaias Israel Zeferino
 
-Time spent: 5.5 hours spent in total
+Time spent: 6.5 hours spent in total
 
 ## User Stories
 
@@ -21,7 +21,8 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [X] Light/Dark Color Theme that can be set through settings
+- [X] Splitting the total including the tip into more than one person 
 
 ## Video Walkthrough 
 
