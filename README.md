@@ -34,7 +34,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+I encountered very few challenges, XCode was very user friendly and swift was not too difficult to grasp. I did have a problem working with animations because it was new to me, but I searched google for ideas and found some simple ones I could implement. 
 
 ## License
 
