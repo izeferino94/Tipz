@@ -9,10 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var billLabel: UILabel!
+    @IBOutlet weak var tipLabel: UILabel!
+    @IBOutlet weak var splitLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
+    
     @IBOutlet weak var tipValue: UILabel!
     @IBOutlet weak var totalValue: UILabel!
     @IBOutlet weak var billField: UITextField!
     @IBOutlet weak var tipChoice: UISegmentedControl!
+    @IBOutlet weak var splitStep: UIStepper!
+    @IBOutlet weak var splitAmount: UILabel!
     
     let defaults = UserDefaults.standard
     let currencyFormatter = NumberFormatter()
@@ -25,6 +32,7 @@ class ViewController: UIViewController {
         currencyFormatter.numberStyle = NumberFormatter.Style.currency
         // localize to your grouping and decimal separator
         currencyFormatter.locale = NSLocale.current
+        print("viewDidLoad")
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,12 +63,18 @@ class ViewController: UIViewController {
         //Calculate the tip and total and update the labels
         let bill = Double(billField.text!) ?? 0
         let tip = bill * tipPercentages[tipChoice.selectedSegmentIndex]
-        let total = bill + tip
+        let total = (bill + tip) / splitStep.value
         tipValue.text = String.init(format: "$%.2f", tip)
         totalValue.text = String.init(format: "$%.2f", total)
         tipValue.text = currencyFormatter.string(from: NSNumber(value: tip))
         totalValue.text = currencyFormatter.string(from: NSNumber(value: total))
     }
+    
+    @IBAction func splitChanged(_ sender: Any) {
+        splitAmount.text = String(format: "%.0f%", splitStep.value)
+        tipChoice.sendActions(for: UIControlEvents.valueChanged)
+    }
+    
     
     
     @IBAction func tipPercentChanged(_ sender: Any) {
@@ -98,23 +112,30 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print("viewWillAppear")
         //When coming back from settings page, we set the segmented controller and update Tip and Total
         loadPercentChoices()
         billField.sendActions(for: UIControlEvents.editingChanged)
+        loadTheme()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         billField.becomeFirstResponder()
+        
+        print("viewDidAppear")
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        print("viewWillDisappear")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        print("viewDidDisappear")
     }
     
     /*
@@ -144,6 +165,41 @@ class ViewController: UIViewController {
             tipChoice.setTitle("25%", forSegmentAt: 2)
         }
     }
+    
+    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
+    }
+    
+    func loadTheme() {
+        let theme = defaults.string(forKey: "theme")
+        if(theme == "dark") {
+            self.view.backgroundColor = UIColorFromHex(rgbValue: 0x0F3161, alpha: 1)
+            tipValue.textColor = UIColor.white
+            totalValue.textColor = UIColor.white
+            splitAmount.textColor = UIColor.white
+            billLabel.textColor = UIColor.white
+            tipLabel.textColor = UIColor.white
+            splitLabel.textColor = UIColor.white
+            totalLabel.textColor = UIColor.white
+            
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+            tipValue.textColor = UIColor.black
+            totalValue.textColor = UIColor.black
+            splitAmount.textColor = UIColor.black
+            billLabel.textColor = UIColor.black
+            tipLabel.textColor = UIColor.black
+            splitLabel.textColor = UIColor.black
+            totalLabel.textColor = UIColor.black
+        }
+
+    }
+    
     
     
 }

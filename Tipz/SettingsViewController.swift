@@ -9,12 +9,22 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
+    //labels
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var firstOptionLabel: UILabel!
+    @IBOutlet weak var secondOptionLabel: UILabel!
+    @IBOutlet weak var thirdOptionLabel: UILabel!
+    @IBOutlet weak var colorThemeLabel: UILabel!
+    
+    
     @IBOutlet weak var firstPercentStep: UIStepper!
     @IBOutlet weak var secondPercentStep: UIStepper!
     @IBOutlet weak var thirdPercentStep: UIStepper!
     @IBOutlet weak var firstPercentValue: UILabel!
     @IBOutlet weak var secondPercentValue: UILabel!
     @IBOutlet weak var thirdPercentValue: UILabel!
+    @IBOutlet weak var themeSegCon: UISegmentedControl!
+    
     
     let defaults = UserDefaults.standard
     
@@ -64,6 +74,13 @@ class SettingsViewController: UIViewController {
         } else {
             thirdPercentStep.value = 25
         }
+        
+        //Set theme control
+        let theme = defaults.string(forKey: "theme")
+        if(theme == "dark") {
+            themeSegCon.selectedSegmentIndex = 1
+            themeSegCon.sendActions(for: UIControlEvents.valueChanged)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,6 +118,35 @@ class SettingsViewController: UIViewController {
         thirdPercentValue.text = String.init(format: "%.0f%%", thirdPercentStep.value)
     }
     
+    @IBAction func themeChanged(_ sender: Any) {
+        if(themeSegCon.selectedSegmentIndex == 0) {
+            defaults.set("light", forKey: "theme")
+            self.view.backgroundColor = UIColor.white
+            firstPercentValue.textColor = UIColor.black
+            secondPercentValue.textColor = UIColor.black
+            thirdPercentValue.textColor = UIColor.black
+            titleLabel.textColor = UIColor.black
+            firstOptionLabel.textColor = UIColor.black
+            secondOptionLabel.textColor = UIColor.black
+            thirdOptionLabel.textColor = UIColor.black
+            colorThemeLabel.textColor = UIColor.black
+            
+        }
+        else {
+            defaults.set("dark", forKey: "theme")
+            self.view.backgroundColor = UIColorFromHex(rgbValue: 0x0F3161, alpha: 1)
+            firstPercentValue.textColor = UIColor.white
+            secondPercentValue.textColor = UIColor.white
+            thirdPercentValue.textColor = UIColor.white
+            titleLabel.textColor = UIColor.white
+            firstOptionLabel.textColor = UIColor.white
+            secondOptionLabel.textColor = UIColor.white
+            thirdOptionLabel.textColor = UIColor.white
+            colorThemeLabel.textColor = UIColor.white
+        }
+        defaults.synchronize()
+    }
+    
     @IBAction func resetPercent(_ sender: Any) {
         //Resetting values in defaults
         defaults.set(false, forKey: "customFirstPercent")
@@ -127,6 +173,14 @@ class SettingsViewController: UIViewController {
             self.secondPercentValue.alpha = 1
             self.thirdPercentValue.alpha = 1
         }, completion: nil)
+    }
+    
+    func UIColorFromHex(rgbValue:UInt32, alpha:Double=1.0)->UIColor {
+        let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
+        let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
+        let blue = CGFloat(rgbValue & 0xFF)/256.0
+        
+        return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
     }
     
 }
